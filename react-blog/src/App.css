@@ -14,6 +14,10 @@ body {
   background-color: #f5f5f5;
 }
 
+#root {
+  width: 100vw;
+}
+
 /* App container */
 .app {
   min-height: 100vh;
@@ -22,6 +26,8 @@ body {
   width: 100%;
   background-color: white;
   position: relative;
+  width: 98vw;
+  overflow: hidden;
 }
 
 /* Header */
@@ -50,8 +56,10 @@ body {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  padding-top: 80px; /* Add space for fixed header */
-  padding-bottom: 80px; /* Add space for fixed bottom nav */
+  padding-top: 80px;
+  /* Add space for fixed header */
+  padding-bottom: 80px;
+  /* Add space for fixed bottom nav */
   width: 100%;
 }
 
@@ -229,8 +237,13 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Error message */
@@ -287,6 +300,12 @@ body {
   color: #24292e;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
 }
 
 .settings-content {
@@ -310,42 +329,46 @@ body {
     margin: 0;
     box-shadow: none;
   }
-  
+
   .header {
     max-width: 100%;
     margin: 0;
   }
-  
+
   .header-title {
     font-size: 1.8rem;
   }
-  
+
   .main-content {
-    padding: 41rem;
+    /* padding: 4rem; */
     padding-top: 80px;
+    width: 60%;
+    display: flex;
     padding-bottom: 80px;
+    margin: auto;
+    justify-content: center;
   }
-  
+
   .trending-repos {
     max-width: 100%;
   }
-  
+
   .repository-item {
     padding: 2rem;
   }
-  
+
   .nav-tab {
     padding: 0.75rem 0;
   }
-  
+
   .nav-icon {
     font-size: 1.25rem;
   }
-  
+
   .nav-text {
     font-size: 0.75rem;
   }
-  
+
   .bottom-nav {
     max-width: 100%;
     margin: 0;
@@ -356,55 +379,56 @@ body {
   .app {
     margin: 0;
     box-shadow: none;
+    width: 100%;
   }
-  
+
   .header {
     padding: 1rem;
     max-width: 100%;
   }
-  
+
   .header-title {
     font-size: 1.25rem;
   }
-  
+
   .main-content {
     padding: 0.5rem;
     padding-top: 70px;
-    padding-bottom: 80px; 
+    padding-bottom: 80px;
   }
-  
+
   .repository-item {
     padding: 2rem;
   }
-  
+
   .repo-header {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
   }
-  
+
   .repo-name {
     margin-right: 0;
     margin-bottom: 0.5rem;
   }
-  
+
   .repo-meta {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .nav-tab {
     padding: 0.5rem 0;
   }
-  
+
   .nav-icon {
     font-size: 1rem;
   }
-  
+
   .nav-text {
     font-size: 0.7rem;
   }
-  
+
   .bottom-nav {
     max-width: 100%;
   }
@@ -414,15 +438,15 @@ body {
   .repository-item {
     padding: 1rem;
   }
-  
+
   .repo-name {
     font-size: 1.1rem;
   }
-  
+
   .repo-description {
     font-size: 0.85rem;
   }
-  
+
   .settings-content {
     padding: 1.5rem;
   }

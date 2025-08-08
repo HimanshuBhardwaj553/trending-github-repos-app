@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import RepositoryList from './RepositoryList';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
+import { fetchTrendingRepositories } from '../services/githubApi.js';
 
 const TrendingRepos = () => {
   const [repositories, setRepositories] = useState([]);
@@ -28,20 +29,19 @@ const TrendingRepos = () => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`http://localhost:5000/api/repositories/trending?page=${pageNum}&per_page=30`);
-      const data = await response.json();
+      const result = await fetchTrendingRepositories(pageNum, 30);
       
-      if (!data.success) {
-        throw new Error(data.error || 'Failed to fetch repositories');
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to fetch repositories');
       }
       
       if (pageNum === 1) {
-        setRepositories(data.data);
+        setRepositories(result.data);
       } else {
-        setRepositories(prev => [...prev, ...data.data]);
+        setRepositories(prev => [...prev, ...result.data]);
       }
       
-      setHasMore(data.pagination.hasNextPage);
+      setHasMore(result.pagination.hasNextPage);
     } catch (err) {
       setError(err.message);
     } finally {

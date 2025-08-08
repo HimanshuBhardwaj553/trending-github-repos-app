@@ -19,10 +19,17 @@ export const fetchTrendingRepositories = async (page = 1, perPage = 30) => {
     );
 
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+      if (response.status === 403) {
+        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+      }
+      throw new Error(`GitHub API error: ${response.status} - ${response.statusText}`);
     }
 
     const data = await response.json();
+    
+    if (!data.items || !Array.isArray(data.items)) {
+      throw new Error('Invalid response from GitHub API');
+    }
     
     // Transform the data to match your existing format
     const repositories = data.items.map(repo => ({
@@ -49,9 +56,10 @@ export const fetchTrendingRepositories = async (page = 1, perPage = 30) => {
       }
     };
   } catch (error) {
+    console.error('GitHub API Error:', error);
     return {
       success: false,
-      error: error.message
+      error: error.message || 'Failed to fetch repositories'
     };
   }
 }; 
